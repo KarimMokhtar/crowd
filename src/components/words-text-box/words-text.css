@@ -1,5 +1,23 @@
-.false-query-text {
+.words-text-container {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 .query-type {
-  background-color: rgb(11, 194, 194);
+  background-color: #59b5ac;
+  color: white;
+  padding: 5px;
+  /* button color: #475259 */
+}
+.words-text-container textarea {
+  height: 200px !important;
+  width: 100%;
+  font-size: 18px;
+}
+.total-characters {
+  float: right;
+  font-size: 18px;
+}
+.max-char-num {
+  font-weight: bold;
 }

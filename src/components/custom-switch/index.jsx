@@ -62,10 +62,10 @@ export default function CustomSwitch({ value, handleChange }) {
         <IOSSwitch
           checked={value}
           onChange={handleChange}
-          name="Boolean Query"
+          name="Booleanean Query"
         />
       }
-      label="Boolean Query Mode"
+      label="Booleanean Query Mode"
     />
   );
 }
