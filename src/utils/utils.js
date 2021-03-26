@@ -16,6 +16,11 @@ export const extarctClickedWord = (cursorPos, searchBy, text) => {
   );
   return currentClickedWord;
 };
+export const trimQoutes = (word) => {
+  if (word[0] === '"' && word[word.length - 1] === '"' && word.length > 1) {
+    return word.substring(1, word.length - 1);
+  } else return word;
+};
 export const getAdjacentWords = (clickedWord, text) => {
   const arr = splitText(text);
   // find the position of the word in the array
@@ -30,9 +35,9 @@ export const getAdjacentWords = (clickedWord, text) => {
       res.push(arr[i]);
     }
   } else {
-    res.push(arr[postionOfWord]);
-    res.push(arr[postionOfWord + 1]);
-    res.push(arr[postionOfWord - 1]);
+    res.push(trimQoutes(arr[postionOfWord]));
+    res.push(trimQoutes(arr[postionOfWord + 1]));
+    res.push(trimQoutes(arr[postionOfWord - 1]));
   }
   return res;
 };

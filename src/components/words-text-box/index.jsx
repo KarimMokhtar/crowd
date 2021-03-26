@@ -27,7 +27,7 @@ const TrueQueryText = ({ type }) => {
   );
 };
 
-export default function WordsTextBox({ type, booleanQuery }) {
+export default function WordsTextBox({ type, booleanQuery, fetchDataAPI }) {
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
@@ -38,9 +38,9 @@ export default function WordsTextBox({ type, booleanQuery }) {
 
     // get adjacent words
     const clickedWord = extarctClickedWord(cursorPos, searchBy, text);
-    const adjWords = getAdjacentWords(clickedWord,text);
-    console.log(adjWords);
+    const adjWords = getAdjacentWords(clickedWord, text);
     // request the api here
+    fetchDataAPI(adjWords);
   };
   const textRef = useRef();
   return (
