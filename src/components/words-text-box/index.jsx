@@ -1,5 +1,6 @@
 import { TextareaAutosize } from "@material-ui/core";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { extarctClickedWord, getAdjacentWords } from "../../utils/utils";
 import "./words-text.css";
 const FalseQueryText = ({ type }) => {
   return (
@@ -27,10 +28,21 @@ const TrueQueryText = ({ type }) => {
 };
 
 export default function WordsTextBox({ type, booleanQuery }) {
-  const [charNum, setCharNum] = useState(0);
+  const [text, setText] = useState("");
   const handleChange = (e) => {
-    setCharNum(e.target.value.length);
+    setText(e.target.value);
   };
+  const handleCick = (e) => {
+    const searchBy = booleanQuery ? "OR" : ",";
+    const cursorPos = textRef.current.selectionStart;
+
+    // get adjacent words
+    const clickedWord = extarctClickedWord(cursorPos, searchBy, text);
+    const adjWords = getAdjacentWords(clickedWord,text);
+    console.log(adjWords);
+    // request the api here
+  };
+  const textRef = useRef();
   return (
     <div className="words-text-container">
       {booleanQuery ? (
@@ -38,9 +50,14 @@ export default function WordsTextBox({ type, booleanQuery }) {
       ) : (
         <FalseQueryText type={type} />
       )}
-      <TextareaAutosize onChange={handleChange} maxLength={450} />
+      <TextareaAutosize
+        ref={textRef}
+        onChange={handleChange}
+        onClick={handleCick}
+        maxLength={450}
+      />
       <p className="total-characters">
-        Total characters {charNum}
+        Total characters {text.length}
         <span className="max-char-num"> / 450</span>
       </p>
     </div>
