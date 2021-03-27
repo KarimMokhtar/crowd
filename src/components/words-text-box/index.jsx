@@ -27,20 +27,20 @@ const TrueQueryText = ({ type }) => {
   );
 };
 
-export default function WordsTextBox({ type, booleanQuery, fetchDataAPI }) {
+export default function WordsTextBox({ type, booleanQuery, fetchData }) {
   const [text, setText] = useState("");
   const handleChange = (e) => {
     setText(e.target.value);
   };
   const handleCick = (e) => {
-    const searchBy = booleanQuery ? "OR" : ",";
+    const splitter = booleanQuery ? "OR" : ",";
     const cursorPos = textRef.current.selectionStart;
 
     // get adjacent words
-    const clickedWord = extarctClickedWord(cursorPos, searchBy, text);
-    const adjWords = getAdjacentWords(clickedWord, text);
+    const clickedWord = extarctClickedWord(cursorPos, splitter, text);
+    const adjWords = getAdjacentWords(clickedWord, text,splitter);
     // request the api here
-    fetchDataAPI(adjWords);
+    fetchData(adjWords);
   };
   const textRef = useRef();
   return (

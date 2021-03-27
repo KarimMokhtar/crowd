@@ -1,38 +1,34 @@
 import { useState } from "react";
 import CustomSwitch from "../custom-switch";
 import BoxesRenderer from "../boxes-renderer";
-import axios from "axios";
 
+import Results from "../results";
+import { fetchDataAPI } from "../../api/variations";
+import './main-container.css'
 export default function MainContainer() {
   const [booleanQuery, setBooleanQuery] = useState(false);
   const [variations, setVariations] = useState([]);
-  const handleBooleaneanChange = () => {
+
+  const handleBooleanChange = () => {
     setBooleanQuery((currVal) => !currVal);
   };
-  const fetchDataAPI = (arr) => {
-    let resultVariations = new Array();
-    arr.forEach(async (word) => {
-      if (word.length) {
-        const res = await axios.get(`http://localhost:5000/words?word=${word}`);
-        resultVariations.push({ ...res.data[0] });
-      }
-    });
-    setVariations(resultVariations);
+
+  const fetchData = async (arr) => {
+    let res = await fetchDataAPI(arr);
+    setVariations(JSON.parse(JSON.stringify(res)));
   };
-  console.log(variations)
+
   return (
     <div className="container">
-      <div>
+      <div className="header-container">
         <h2>Create New Sub-query</h2>
         <CustomSwitch
           value={booleanQuery}
-          handleChange={handleBooleaneanChange}
-        />
-        <BoxesRenderer
-          fetchDataAPI={fetchDataAPI}
-          booleanQuery={booleanQuery}
+          handleChange={handleBooleanChange}
         />
       </div>
+        <BoxesRenderer fetchData={fetchData} booleanQuery={booleanQuery} />
+        <Results results={variations} booleanQuery={booleanQuery}/>
     </div>
   );
 }

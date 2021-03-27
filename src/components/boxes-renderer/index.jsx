@@ -1,27 +1,27 @@
 import WordsTextBox from "../words-text-box";
 import "./boxes-renderer.css";
-export default function BoxesRenderer({ booleanQuery, fetchDataAPI }) {
+export default function BoxesRenderer({ booleanQuery, fetchData }) {
   return booleanQuery ? (
     <WordsTextBox
-      type="BooleanEAN QUERY"
-      fetchDataAPI={fetchDataAPI}
+      type="Boolean QUERY"
+      fetchData={fetchData}
       booleanQuery={booleanQuery}
     />
   ) : (
     <div className="boxes-renderer-container">
       <WordsTextBox
         type="ANY"
-        fetchDataAPI={fetchDataAPI}
+        fetchData={fetchData}
         booleanQuery={booleanQuery}
       />
       <WordsTextBox
         type="AND"
-        fetchDataAPI={fetchDataAPI}
+        fetchData={fetchData}
         booleanQuery={booleanQuery}
       />
       <WordsTextBox
         type="NOT"
-        fetchDataAPI={fetchDataAPI}
+        fetchData={fetchData}
         booleanQuery={booleanQuery}
       />
     </div>
