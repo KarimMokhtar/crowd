@@ -38,17 +38,17 @@ export default function WordsTextBox({ type, booleanQuery, fetchData }) {
 
     // get adjacent words
     const clickedWord = extarctClickedWord(cursorPos, splitter, text);
-    const adjWords = getAdjacentWords(clickedWord, text,splitter);
+    const adjWords = getAdjacentWords(clickedWord, text, splitter);
     // request the api here
     fetchData(adjWords);
   };
   const textRef = useRef();
   return (
-    <div className="words-text-container">
+    <div data-test="words-text-container" className="words-text-container">
       {booleanQuery ? (
-        <TrueQueryText type={type} />
+        <TrueQueryText data-test="true-query-text" type={type} />
       ) : (
-        <FalseQueryText type={type} />
+        <FalseQueryText data-test="false-query-text" type={type} />
       )}
       <TextareaAutosize
         ref={textRef}

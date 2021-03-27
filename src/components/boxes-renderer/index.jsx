@@ -6,6 +6,7 @@ export default function BoxesRenderer({ booleanQuery, fetchData }) {
       type="Boolean QUERY"
       fetchData={fetchData}
       booleanQuery={booleanQuery}
+      data-test="true-boolean"
     />
   ) : (
     <div className="boxes-renderer-container">
@@ -13,16 +14,19 @@ export default function BoxesRenderer({ booleanQuery, fetchData }) {
         type="ANY"
         fetchData={fetchData}
         booleanQuery={booleanQuery}
+        data-test="false-boolean"
       />
       <WordsTextBox
         type="AND"
         fetchData={fetchData}
         booleanQuery={booleanQuery}
+        data-test="false-boolean"
       />
       <WordsTextBox
         type="NOT"
         fetchData={fetchData}
         booleanQuery={booleanQuery}
+        data-test="false-boolean"
       />
     </div>
   );
