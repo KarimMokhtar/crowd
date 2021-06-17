@@ -1,4 +1,3 @@
-# Getting Started with Crowd analyser task
 
 ## Available Scripts
 
